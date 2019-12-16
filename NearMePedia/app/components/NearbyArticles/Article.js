@@ -35,7 +35,7 @@ export const Article = ({article}) => {
                 <View onStartShouldSetResponder={() => Linking.openURL('https://en.wikipedia.org/wiki/' + article.title.split(' ').join('_'))}>
                     <Text style={styles.articleTextStyle}>{article.title} </Text>
                 </View>
-                <Text style={styles.articleTextStyle}>Distance: {article.dist} km</Text>
+                <Text style={styles.articleTextStyle}>Distance: {((article.dist)/1000).toFixed(2)} km</Text>
             </View>
             <TouchableOpacity onPress={() => handleAdd(article)}>
                 <Ionicons
