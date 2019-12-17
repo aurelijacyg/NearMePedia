@@ -29,13 +29,21 @@ export const Article = ({article}) => {
         }
     }
 
+    getUrl = (title) =>  {
+        return 'https://en.wikipedia.org/wiki/' + title.split(' ').join('_');
+    }
+
+    getDistanceInKm = (dist) => {
+        return (dist/1000).toFixed(2);
+    }
+
     return (
         <View style={styles.article}>
             <View style={styles.infoStyle}>
-                <View onStartShouldSetResponder={() => Linking.openURL('https://en.wikipedia.org/wiki/' + article.title.split(' ').join('_'))}>
+                <View onStartShouldSetResponder={() => Linking.openURL(getUrl(article.title))}>
                     <Text style={styles.articleTextStyle}>{article.title} </Text>
                 </View>
-                <Text style={styles.articleTextStyle}>Distance: {((article.dist)/1000).toFixed(2)} km</Text>
+                <Text style={styles.articleTextStyle}>Distance: {getDistanceInKm(article.dist)} km</Text>
             </View>
             <TouchableOpacity onPress={() => handleAdd(article)}>
                 <Ionicons

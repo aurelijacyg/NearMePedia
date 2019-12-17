@@ -2,8 +2,8 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';  
 import Constants from 'expo-constants';
 
-import {Provider} from 'react-redux'
-import store from './app/redux/store'
+import {Provider} from 'react-redux';
+import store from './app/redux/store';
 
 import Navigation from './app/components/Navigation'; 
 
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     },
     mainText: {
         color: "#762F2F",
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: "bold",
         fontFamily: "Courier",
     },

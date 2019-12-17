@@ -16,7 +16,6 @@ const ScreenC = () => {
                 <Article article={article}/>
             </View>
         ))}
-        
         </ScrollView>
     </View>
     );

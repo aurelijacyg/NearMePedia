@@ -29,20 +29,24 @@ export const Article = ({article}) => {
         var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
         var d = R * c;
-        return d;
+        return d.toFixed(2);
     }
 
-    toRad = (value)  =>{
+    toRad = (value)  => {
         return value * Math.PI / 180;
+    }
+
+    getUrl = (title) =>  {
+        return 'https://en.wikipedia.org/wiki/' + title.split(' ').join('_')
     }
 
     return (
         <View style={styles.article}>
             <View style = {styles.infoStyle}>
-                <View onStartShouldSetResponder={() => Linking.openURL('https://en.wikipedia.org/wiki/' + article.title.split(' ').join('_'))}>
+                <View onStartShouldSetResponder={() => Linking.openURL(getUrl(article.title))}>
                     <Text style={styles.articleTextStyle}>{article.title} </Text>
                 </View>
-                <Text style={styles.articleTextStyle}>Distance: {getDistance(article).toFixed(2)} km</Text>
+                <Text style={styles.articleTextStyle}>Distance: {getDistance(article)} km</Text>
             </View>
             
             <TouchableOpacity onPress={() => removeArticleFromReadingList(article)}>
@@ -74,7 +78,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 120,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         backgroundColor:'black',
         borderWidth: 1,
         borderColor: '#202020'

@@ -7,7 +7,6 @@ import { assignArticlesFromApi } from '../../redux/actions';
 
 import { ArticlesList } from './ArticlesList';
 
-
 const ScreenA = () => {
 
     const [latitude, setLatitude] = useState("undef"); 
@@ -56,7 +55,7 @@ const ScreenA = () => {
     }
 
     useEffect(()=>{
-        if (latitude === "undef" && longitude === "undef"){
+        if (currentCoord.latitude === undefined || currentCoord.longitude === undefined){
             this.getCoordinates();
         } else {
             setLatitude(JSON.stringify(currentCoord.latitude));

@@ -23,7 +23,7 @@ export const AddLocation = (props) => {
       }
     }
 
-    saveLocation = async address => {
+    saveLocation = async value => {
       let result = await Location.geocodeAsync(value);
       coordinates = {latitude: result[0].latitude, longitude: result[0].longitude}
 
@@ -82,10 +82,10 @@ export const AddLocation = (props) => {
                 onChangeText={value => setValue(value)}
               />   
             </View>
-            <Button color="#762F2F" title="Set" onPress={()=>saveLocation()} />
+            <Button color="#762F2F" title="Set" onPress={()=>saveLocation(value)} />
           </View>
           
-          <Button color="#762F2F" title="Set current position by GPS coordinates" onPress={()=>assignCurrentLoc()} />
+          <Button color="#762F2F" title="Set location by current GPS coordinates" onPress={()=>assignCurrentLoc()} />
         </View>
     )
 }

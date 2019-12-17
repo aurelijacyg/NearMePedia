@@ -4,21 +4,27 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { assignLocations} from '../../redux/actions';
+import { assignCurrentLocation } from '../../redux/actions';
 
-
-export const LocationItem = ({savedLocation}) => {
-    const location = savedLocation;
+export const LocationItem = (props) => {
+    const location = props.savedLocation;
     const history = useSelector(state => state.locations);
     const dispatch = useDispatch();
 
     removeLocationFromHistory = (location) => {
-        const newHistory = history.filter((item) => ((item.latitude !== location.latitude) && (item.longitude !== location.longitude)));
+        let newHistory = history.filter((item) => ((item.latitude !== location.latitude) && (item.longitude !== location.longitude)));
         dispatch(assignLocations(newHistory));
+    }
+
+    setCurrentLocation = (location) => {
+        let coordinates = {latitude: location.latitude, longitude: location.longitude};
+        dispatch(assignCurrentLocation(coordinates));
+        props.navigation.navigate('Articles');
     }
    
     return (
-        <View style={styles.location}>
-            <View style={styles.info}>
+        <View style={styles.location}>         
+            <TouchableOpacity style={styles.info} onPress={() => setCurrentLocation(location)}>
                 <Text style={styles.textStyle}>
                     Country: {location.country} 
                 </Text>
@@ -27,8 +33,8 @@ export const LocationItem = ({savedLocation}) => {
                 </Text>
                 <Text style={styles.textStyle}>
                     Street: {location.street}
-                </Text>
-            </View>
+                </Text>    
+            </TouchableOpacity>
             
             <View style={styles.deleteIcon}>
                 <TouchableOpacity  onPress={() => removeLocationFromHistory(location)}>
@@ -43,20 +49,21 @@ export const LocationItem = ({savedLocation}) => {
     )
 }
 
-
 const styles = StyleSheet.create({
     info: {
         alignItems: "center",
-        justifyContent: "center",
-        width: 300
+        justifyContent: "flex-start",
+        width: "80%",
+        
     },
     deleteIcon: {
         alignItems: "flex-end",
         justifyContent: "flex-end",
-        width: 80
+        width: "20%",
+        marginRight: 40
     },
     location: {
-        width: 380,
+        width: "100%",
         height: 120,
         alignItems: "center",
         justifyContent: "center",

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView, Text,Button } from 'react-native';
+import { View, StyleSheet, ScrollView, Text} from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { LocationItem } from './Location';
@@ -11,13 +11,13 @@ const ScreenB = (props) => {
     return(
       <View>
         <Text style={styles.textStyle}>Set Location</Text> 
-        <AddLocation navigation ={props.navigation}/>
+        <AddLocation navigation = {props.navigation}/>
         
         <Text style={styles.textStyle}>History</Text> 
         <ScrollView contentContainerStyle={{ alignItems: "center"}} style={styles.scrollView}>
           {savedLocations.map(savedLocation => (
             <View key = {Math.random()}>
-                <LocationItem savedLocation={savedLocation}/>
+                <LocationItem navigation = {props.navigation} savedLocation={savedLocation}/>
             </View>
           ))}
         </ScrollView>
